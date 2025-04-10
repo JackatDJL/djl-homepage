@@ -6,9 +6,12 @@
  * TL;DR - This is where all the tRPC server stuff is created and plugged in. The pieces you will
  * need to use are documented accordingly near the end.
  */
+import { auth } from "@clerk/nextjs/server";
 import { initTRPC } from "@trpc/server";
+import { headers } from "next/headers";
 import superjson from "superjson";
 import { ZodError } from "zod";
+import { env } from "~/env";
 
 import { db } from "~/server/db";
 
@@ -25,8 +28,10 @@ import { db } from "~/server/db";
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
+  const authData = await auth();
   return {
     db,
+    auth: authData,
     ...opts,
   };
 };
@@ -96,6 +101,47 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
   return result;
 });
 
+const authAndTimingMiddleware = t.middleware(async ({ next, path }) => {
+  const start = Date.now();
+
+  if (t._config.isDev) {
+    // artificial delay in dev
+    const waitMs = Math.floor(Math.random() * 400) + 100;
+    await new Promise((resolve) => setTimeout(resolve, waitMs));
+  }
+
+  await auth.protect();
+
+  const result = await next();
+
+  const end = Date.now();
+  console.log(`[TRPC] ${path} took ${end - start}ms to execute`);
+
+  return result;
+});
+
+const cronMiddleware = t.middleware(async ({ next, path }) => {
+  const start = Date.now();
+  const auth = await headers();
+  const authHeader = auth.get("Authorization");
+  if (!authHeader) {
+    throw new Error("No authorization header");
+  }
+  if (authHeader !== env.CRON_SECRET) {
+    throw new Error("Invalid authorization header");
+  }
+  if (t._config.isDev) {
+    // artificial delay in dev
+    const waitMs = Math.floor(Math.random() * 400) + 100;
+    await new Promise((resolve) => setTimeout(resolve, waitMs));
+  }
+
+  const result = await next();
+  const end = Date.now();
+  console.log(`[TRPC] ${path} took ${end - start}ms to execute`);
+  return result;
+});
+
 /**
  * Public (unauthenticated) procedure
  *
@@ -104,3 +150,13 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
  * are logged in.
  */
 export const publicProcedure = t.procedure.use(timingMiddleware);
+
+/**
+ * Protected (authenticated) procedure
+ *
+ * This is the base piece you use to build new queries and mutations on your tRPC API. It guarantees
+ * that a user querying is authorized, and you can access user session data.
+ */
+export const protectedProcedure = t.procedure.use(authAndTimingMiddleware);
+
+export const secureCronProcedure = t.procedure.use(cronMiddleware);

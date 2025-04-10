@@ -24,7 +24,7 @@ export const env = createEnv({
 
     // Vercel Keys
     CRON_SECRET: z.string(),
-    FLAGS_SECRET: z.string(),
+    FLAGS_SECRET: z.string().optional(),
 
     // Storage Keys
     BLOB_READ_WRITE_TOKEN: z.string(),
@@ -38,7 +38,7 @@ export const env = createEnv({
     // Analytics and Flags
     NEXT_PUBLIC_POSTHOG_KEY: z.string(),
     NEXT_PUBLIC_POSTHOG_HOST: z.string(),
-    NEXT_PUBLIC_SENTRY_DSN: z.string().url(),
+    NEXT_PUBLIC_SENTRY_DSN: z.string().url().optional(),
 
     // Auth Key
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),
