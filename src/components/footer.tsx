@@ -22,12 +22,13 @@ export default function Footer() {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <p className="text-muted-foreground font-medium print:text-black">
-              Wahlen Foundation
+              The DJL Foundation
             </p>
             <p className="text-muted-foreground text-sm print:text-black">
-              Making elections accessible anywhere, anytime.
+              Supporting youth in robotics, computer science, and engineering
+              across Northern Germany.
               <br />
-              The new Digital Era.
+              Building the future - together.
             </p>
           </motion.div>
 
@@ -36,7 +37,7 @@ export default function Footer() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex items-center gap-2 rounded bg-yellow-100 px-3 py-1 text-yellow-800 shadow-md"
+              className="mx-auto flex items-center justify-center gap-2 rounded bg-yellow-100 px-3 py-1 text-yellow-800 shadow-md"
             >
               <span className="font-bold uppercase">Beta</span>
               <span className="text-xs">
@@ -113,13 +114,12 @@ export default function Footer() {
             transition={{ duration: 0.5, delay: 0.35 }}
           >
             <p className="text-muted-foreground pt-1 text-center text-sm print:text-black">
-              The Wahlen Foundation and the DJL Foundation do not endorse any
-              elections hosted on this platform.
+              The DJL Foundation is an independent non-profit organization and
+              does not endorse any political activity.
             </p>
           </motion.div>
           <p>
-            © {new Date().getFullYear()} By Jack @ DJL Foundation. All rights
-            reserved.
+            © {new Date().getFullYear()} DJL Foundation. All rights reserved.
           </p>
         </motion.div>
       </div>

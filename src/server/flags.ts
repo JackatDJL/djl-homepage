@@ -17,6 +17,16 @@ export const earlyAccessFlag = flag({
   },
 });
 
+export const dropdownHeaderFlag = flag({
+  key: "dropdown-header",
+  description: "Shows a Dropdown with the Featured Blogposts and Projects",
+  defaultValue: false,
+  identify,
+  decide() {
+    return !!posthog.isFeatureEnabled("dropdown-header");
+  },
+});
+
 export const devModeFlag = flag({
   key: "dev-mode",
   description: "Overwrites some difficult Stuff",

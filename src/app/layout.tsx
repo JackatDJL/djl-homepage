@@ -18,6 +18,7 @@ import { dark } from "@clerk/themes";
 import { PostHogProvider } from "~/server/providers";
 import { env } from "~/env";
 import { VercelToolbar } from "@vercel/toolbar/next";
+import { dropdownHeaderFlag } from "~/server/flags";
 
 // Implement Metadata Images TODO
 export const metadata: Metadata = {
@@ -93,10 +94,11 @@ export const metadata: Metadata = {
   classification: "Voting Platform",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const shouldShowVercelToolbar = env.NODE_ENV === "development";
+  const shouldShowHeaderDropdown = await dropdownHeaderFlag();
   return (
     <ClerkProvider
       appearance={{
@@ -117,7 +119,7 @@ export default function RootLayout({
               >
                 <Toaster />
                 <div className="bg-background text-foreground flex min-h-screen flex-col">
-                  <Header />
+                  <Header isDropdownEnabled={shouldShowHeaderDropdown} />
                   <main className="flex-grow">{children}</main>
                   <Footer />
                 </div>

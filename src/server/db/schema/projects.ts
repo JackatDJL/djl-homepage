@@ -55,6 +55,7 @@ export const projects = projectSchema.table(
 
     oss: boolean("oss").default(true).notNull(),
     private: boolean("private").default(false).notNull(),
+    featured: boolean("featured").default(false).notNull(),
 
     coverImageId: uuid("cover_image_id").references(() => files.id),
     logoImageId: uuid("logo_image_id").references(() => files.id),
