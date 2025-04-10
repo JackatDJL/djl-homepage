@@ -171,7 +171,8 @@ export async function handleDatabaseInteraction<T, D extends boolean = true>(
     return ok({
       type: apiResponseTypes.Success,
 
-      data: resultArray! as any, // Type assertion needed due to conditional return type
+      // @ts-ignore The type isnt automaticly inferred
+      data: resultArray! as any,
     });
   }
 
@@ -199,6 +200,7 @@ export async function handleDatabaseInteraction<T, D extends boolean = true>(
     type: apiResponseTypes.Success,
     detailedType: apiResponseDetailedTypes.Success,
 
+    // @ts-ignore The type isnt automaticly inferred
     data: result! as any,
   });
 }

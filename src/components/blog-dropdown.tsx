@@ -59,7 +59,7 @@ export function BlogDropdown({ isOpen, posts }: BlogDropdownProps) {
                             {post.title}
                           </CardTitle>
                           <CardDescription className="line-clamp-2">
-                            {post.subtitle || ""}
+                            {post.subtitle ?? ""}
                           </CardDescription>
                         </CardHeader>
                         <CardContent className="p-4 pt-0">

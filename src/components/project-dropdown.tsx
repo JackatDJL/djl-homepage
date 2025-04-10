@@ -77,7 +77,7 @@ export function ProjectDropdown({ isOpen, projects }: ProjectDropdownProps) {
                       {project.title}
                     </CardTitle>
                     <CardDescription className="line-clamp-2">
-                      {project.description || "No description available"}
+                      {project.description ?? "No description available"}
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="p-4 pt-0">
