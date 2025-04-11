@@ -6,7 +6,6 @@
  * TL;DR - This is where all the tRPC server stuff is created and plugged in. The pieces you will
  * need to use are documented accordingly near the end.
  */
-import { auth } from "@clerk/nextjs/server";
 import { initTRPC } from "@trpc/server";
 import { headers } from "next/headers";
 import superjson from "superjson";
@@ -28,10 +27,8 @@ import { db } from "~/server/db";
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
-  const authData = await auth();
   return {
     db,
-    auth: authData,
     ...opts,
   };
 };
@@ -110,8 +107,6 @@ const authAndTimingMiddleware = t.middleware(async ({ next, path }) => {
     await new Promise((resolve) => setTimeout(resolve, waitMs));
   }
 
-  await auth.protect();
-
   const result = await next();
 
   const end = Date.now();
@@ -127,9 +122,9 @@ const cronMiddleware = t.middleware(async ({ next, path }) => {
   if (!authHeader) {
     throw new Error("No authorization header");
   }
-  if (authHeader !== env.CRON_SECRET) {
-    throw new Error("Invalid authorization header");
-  }
+  // if (authHeader !== env.CRON_SECRET) {
+  //   throw new Error("Invalid authorization header");
+  // }
   if (t._config.isDev) {
     // artificial delay in dev
     const waitMs = Math.floor(Math.random() * 400) + 100;
