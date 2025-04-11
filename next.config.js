@@ -43,7 +43,7 @@ export default withSentryConfig(VercelToolbarConfig, {
   // https://www.npmjs.com/package/@sentry/webpack-plugin#options
 
   org: "djl-foundation",
-  project: "wahlen-foundation",
+  project: "djl-foundation-homepage",
 
   // Only print logs for uploading source maps in CI
   silent: !process.env.CI,

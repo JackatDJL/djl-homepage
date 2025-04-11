@@ -170,9 +170,9 @@ export async function handleDatabaseInteraction<T, D extends boolean = true>(
   if (!deconstructArray) {
     return ok({
       type: apiResponseTypes.Success,
+      detailedType: apiResponseDetailedTypes.Success,
 
-      // @ts-ignore The type isnt automaticly inferred
-      data: resultArray! as any,
+      data: resultArray as unknown as D extends true ? T : T[],
     });
   }
 
@@ -200,7 +200,6 @@ export async function handleDatabaseInteraction<T, D extends boolean = true>(
     type: apiResponseTypes.Success,
     detailedType: apiResponseDetailedTypes.Success,
 
-    // @ts-ignore The type isnt automaticly inferred
-    data: result! as any,
+    data: (deconstructArray ? result : resultArray) as D extends true ? T : T[],
   });
 }

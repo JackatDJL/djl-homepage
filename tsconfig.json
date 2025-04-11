@@ -8,7 +8,6 @@
     "resolveJsonModule": true,
     "moduleDetection": "force",
     "isolatedModules": true,
-    "verbatimModuleSyntax": true,
 
     /* Strictness */
     "strict": true,
@@ -31,13 +30,14 @@
     }
   },
   "include": [
+    ".eslintrc.cjs",
     "next-env.d.ts",
-    "/src/app/.well-known/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
     "**/*.cjs",
     "**/*.js",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/app/.well-known/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

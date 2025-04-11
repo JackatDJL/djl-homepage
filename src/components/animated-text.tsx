@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type MotionProps } from "motion/react";
+import { motion } from "motion/react";
 
 interface AnimatedTextProps {
   text: string;
