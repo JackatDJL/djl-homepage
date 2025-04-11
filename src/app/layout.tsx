@@ -20,26 +20,33 @@ import { env } from "~/env";
 import { VercelToolbar } from "@vercel/toolbar/next";
 import { dropdownHeaderFlag } from "~/server/flags";
 
-// Implement Metadata Images TODO
 export const metadata: Metadata = {
-  title: "The Wahlen Foundation - by DJL",
+  title:
+    "The DJL Foundation: Empowering Youth in Robotics, Computer Science & Engineering",
   description:
-    "Experience the future of elections – innovative, secure, and intuitive. The Wahlen Foundation revolutionizes your voting process with cutting-edge technology and a seamless user experience.",
+    "We support young talents in Northern Germany in robotics, computer science, and engineering. Building the future - together!",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
   generator: "Next.js",
-  applicationName: "The Wahlen Foundation",
+  applicationName: "The DJL Foundation",
   referrer: "origin-when-cross-origin",
   keywords: [
-    "elections",
-    "voting platform",
-    "digital voting",
-    "innovation",
+    "youth support",
+    "robotics",
+    "computer science",
+    "engineering",
+    "Northern Germany",
     "DJL",
-    "revolutionary",
-    "secure",
-    "intuitive",
+    "foundation",
+    "education",
+    "technology",
+    "innovation",
+    "STEM",
+    "talent development",
+    "shaping the future",
   ],
-  authors: [{ name: "Jack Ruder", url: "https://jack.djl.foundation" }],
+  authors: [
+    { name: "Jack Ruder", url: "https://djl.foundation/about-us#jack-ruder" },
+  ],
   creator: "JackatDJL",
   publisher: "The DJL Foundation",
   formatDetection: {
@@ -48,19 +55,19 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "The Wahlen Foundation - by DJL",
+    title: "The DJL Foundation: Empowering Young Talents in Northern Germany",
     description:
-      "Experience a revolutionary election platform that empowers you with modern, secure, and intuitive voting. Transform your election process with The Wahlen Foundation.",
-    url: "https://wahlen.djl.foundation",
+      "Join us in supporting the next generation in robotics, computer science, and engineering. Building the future - together!",
+    url: "https://djl.foundation",
     type: "website",
-    locale: "en_US",
-    siteName: "The Wahlen Foundation",
+    locale: "en_US", // Adjust this if the primary language of the site is German
+    siteName: "The DJL Foundation",
     images: [
       {
         url: "/img/og.png",
         width: 1200,
         height: 630,
-        alt: "The Wahlen Foundation - by DJL",
+        alt: "The DJL Foundation: Empowering Youth",
       },
     ],
   },
@@ -80,18 +87,18 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@JackatDJL",
-    title: "The Wahlen Foundation - by DJL",
+    title: "The DJL Foundation: Shaping the Future with Young Talents",
     description:
-      "Experience a revolutionary voting platform – modern, secure, and intuitive. Transform your election process with The Wahlen Foundation.",
+      "We support youth in Northern Germany in robotics, computer science, and engineering. Learn more!",
     images: {
       url: "/img/og.png",
       width: 1200,
       height: 630,
-      alt: "The Wahlen Foundation - by DJL",
+      alt: "DJL Foundation: Talent Development",
     },
   },
-  category: "Internet",
-  classification: "Voting Platform",
+  category: "Non-Profit",
+  classification: "Educational Facility",
 };
 
 export default async function RootLayout({
