@@ -1,7 +1,7 @@
 import { verifyAccess, type ApiData } from "flags";
 import { getProviderData } from "flags/next";
 import { NextResponse, type NextRequest } from "next/server";
-import * as flags from "../../../../server/flags";
+import * as flags from "~/server/flags";
 
 export async function GET(request: NextRequest) {
   const access = await verifyAccess(request.headers.get("Authorization"));

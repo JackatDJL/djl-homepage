@@ -1,29 +1,34 @@
-# Create T3 App
+# The DJL Foundation Homepage
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Welcome to the official homepage of the DJL Foundation, a non-profit organization dedicated to empowering youth in robotics, computer science, and engineering across Northern Germany. Our mission is to foster talent, innovation, and education in STEM fields, shaping the future together.
 
-## What's next? How do I make an app with this?
+## Über uns
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+Die DJL Foundation ist ein gemeinnütziges Netzwerk, das sich der Förderung von Bildung und Innovation in den Bereichen Informationstechnologie, Robotik und Mechatronik verschrieben hat. Unser Ziel ist es, jungen Menschen in Norddeutschland die Möglichkeit zu geben, ihre Talente zu entdecken und weiterzuentwickeln.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+Unsere Arbeit basiert auf der Überzeugung, dass Bildung und Zusammenarbeit der Schlüssel zu einer besseren Zukunft sind. Wir unterstützen Initiativen, organisieren Veranstaltungen wie Hackathons und Workshops und schaffen Plattformen, auf denen junge Talente ihre Fähigkeiten entfalten können.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+Der Name DJL steht für "Digitales Jugend Lernzentrum" und spiegelt unser Ziel wider, ein Zentrum für Lernen und Innovation zu schaffen. Wir streben an, die DJL Foundation offiziell als gemeinnützige Organisation eintragen zu lassen und sie vom Finanzamt als gemeinnützig anerkennen zu lassen.
 
-## Learn More
+## Unsere Mission
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+- **Jugend stärken**: Unterstützung junger Talente in Norddeutschland in den MINT-Bereichen.
+- **Innovation fördern**: Kreativität und Problemlösung durch Robotik und Informatik anregen.
+- **Gemeinschaft aufbauen**: Ein Netzwerk von Gleichgesinnten schaffen, die sich für Technologie und Bildung begeistern.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+## Um ehrlich zu sein
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+Wieso schreib ich eigendlich das noch in eine Readme?
+Lest euch mahl lieber die webseite durch
 
-## How do I deploy this?
+[>> Hier <<](https://djl.foundation)
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+## Kontakt
+
+Für weitere Informationen besuchen Sie unsere Website oder kontaktieren Sie uns direkt:
+
+- Website: [https://djl.foundation](https://djl.foundation)
+- E-Mail: [contact@djl.foundation](mailto:contact@djl.foundation)
+- GitHub: [@djl-foundation](https://github.com/djl-foundation)
+
+Gemeinsam können wir die Zukunft gestalten.

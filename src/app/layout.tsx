@@ -1,8 +1,8 @@
 import "~/styles/globals.css";
 
-import { GeistSans } from "geist/font/sans";
-import type React from "react";
-import type { Metadata } from "next";
+import { type Metadata } from "next";
+import { Geist } from "next/font/google";
+
 import Header from "~/components/header";
 import Footer from "~/components/footer";
 import { ThemeProvider } from "~/components/theme-provider";
@@ -101,6 +101,11 @@ export const metadata: Metadata = {
   classification: "Educational Facility",
 };
 
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist-sans",
+});
+
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -112,7 +117,7 @@ export default async function RootLayout({
         baseTheme: dark,
       }}
     >
-      <html lang="en" className={`${GeistSans.variable}`}>
+      <html lang="en" className={`${geist.variable}`}>
         <body>
           <PostHogProvider>
             <Analytics />

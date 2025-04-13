@@ -10,6 +10,10 @@ const nextConfig = {
   async rewrites() {
     return [
       {
+        source: "/.well-known/:path*",
+        destination: "/api/2well2know/:path*",
+      },
+      {
         source: "/ingest/:path*",
         destination: "https://eu.i.posthog.com/:path*",
       },
