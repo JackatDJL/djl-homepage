@@ -31,13 +31,13 @@ importers:
         version: 5.74.0(react@19.1.0)
       '@trpc/client':
         specifier: ^11.0.0
-        version: 11.1.0(@trpc/server@11.1.0(typescript@5.8.3))(typescript@5.8.3)
+        version: 11.1.0(@trpc/server@11.1.1(typescript@5.8.3))(typescript@5.8.3)
       '@trpc/react-query':
         specifier: ^11.0.0
-        version: 11.1.0(@tanstack/react-query@5.74.0(react@19.1.0))(@trpc/client@11.1.0(@trpc/server@11.1.0(typescript@5.8.3))(typescript@5.8.3))(@trpc/server@11.1.0(typescript@5.8.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)
+        version: 11.1.0(@tanstack/react-query@5.74.0(react@19.1.0))(@trpc/client@11.1.0(@trpc/server@11.1.1(typescript@5.8.3))(typescript@5.8.3))(@trpc/server@11.1.1(typescript@5.8.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)
       '@trpc/server':
-        specifier: ^11.0.0
-        version: 11.1.0(typescript@5.8.3)
+        specifier: ^11.1.1
+        version: 11.1.1(typescript@5.8.3)
       '@types/pg':
         specifier: ^8.11.12
         version: 8.11.12
@@ -248,6 +248,7 @@ packages:
   '@clerk/backend@1.27.3':
     resolution: {integrity: sha512-Epuhej19VcBnPfDenQoDvj+MpExs/OhJRsFM0jM1TmTt75tE6UFJwJHD5byAPX0TuGvncHKqv5FjcuPEF8zu5Q==}
     engines: {node: '>=18.17.0'}
+    deprecated: Incorrect parsing of the experimental JWT v2 claims. Please update to the latest version. For more information about JWT v2, see https://clerk.com/docs/backend-requests/resources/session-tokens
     peerDependencies:
       svix: ^1.62.0
     peerDependenciesMeta:
@@ -264,6 +265,7 @@ packages:
   '@clerk/nextjs@6.14.3':
     resolution: {integrity: sha512-HMZPn8Rv9waatoKihH0HcRjiZKzTO1OmrZxkFdFwbLlyQBeOYe5u85qgTZR0elvIp6zD5kGjj+l3b6HVLqrMrw==}
     engines: {node: '>=18.17.0'}
+    deprecated: Incorrect parsing of the experimental JWT v2 claims. Please update to the latest version. For more information about JWT v2, see https://clerk.com/docs/backend-requests/resources/session-tokens
     peerDependencies:
       next: ^13.5.7 || ^14.2.25 || ^15.2.3
       react: ^18.0.0 || ^19.0.0 || ^19.0.0-0
@@ -1764,8 +1766,8 @@ packages:
       react-dom: '>=18.2.0'
       typescript: '>=5.7.2'
 
-  '@trpc/server@11.1.0':
-    resolution: {integrity: sha512-uAJ7ikejeujVkf53XFJ/0W8nr7bDjul+Szk5Rsepq97Hb/WS1RkRXdyX4KqAyCE9b1vDFCJVJwSxiIZdRtbTZQ==}
+  '@trpc/server@11.1.1':
+    resolution: {integrity: sha512-ZjPN3ypBHvGMAlMgeZPrxlRcH/3dn4AK0s5Ph1z+E6uiAvIQVCj7ZoMlXeeBsIy4THGDAk953jHVW2kMnlbb4g==}
     peerDependencies:
       typescript: '>=5.7.2'
 
@@ -2547,8 +2549,8 @@ packages:
     resolution: {integrity: sha512-84QoSLeA7cdTeHpALFNl3ZOstXfvLt426/kaOgmSxmNUOhi4GesKVkhJgIfnsqGNziYezVA8rvZUsXj7oWX2qQ==}
     engines: {node: '>=12.x'}
 
-  es-module-lexer@1.6.0:
-    resolution: {integrity: sha512-qqnD1yMU6tk/jnaMosogGySTZP8YtUgAffA9nMN+E/rjxcfRQ6IEk7IiozUjgxKoFHBGjTLnrHB/YC45r/59EQ==}
+  es-module-lexer@1.7.0:
+    resolution: {integrity: sha512-jEQoCwk8hyb2AZziIOLhDqpm5+2ww5uIE6lkO/6jcOCusfk6LhMHpXXfBLXTZ7Ydyt0j4VoUQv6uGNYbdW+kBA==}
 
   es-object-atoms@1.1.1:
     resolution: {integrity: sha512-FGgH2h8zKNim9ljj7dankFPcICIK9Cp5bm+c2gQSYePhpaG5+esrLODihIorn+Pe6FGJzWhXQotPv73jTaldXA==}
@@ -3869,8 +3871,8 @@ packages:
   scheduler@0.26.0:
     resolution: {integrity: sha512-NlHwttCI/l5gCPR3D1nNXtWABUmBwvZpEQiD4IXSbIDq8BzLIK/7Ir5gTFSGZDUu37K5cMNp0hFtzO38sC7gWA==}
 
-  schema-utils@4.3.0:
-    resolution: {integrity: sha512-Gf9qqc58SpCA/xdziiHz35F4GNIWYWZrEshUc/G/r5BnLph6xpKuLeoJoQuj5WfBIx/eQLf+hmVPYHaxJu7V2g==}
+  schema-utils@4.3.2:
+    resolution: {integrity: sha512-Gn/JaSk/Mt9gYubxTtSn/QCV4em9mpAPiR1rqy/Ocu19u/G9J5WWdNoUT4SiV6mFC3y6cxyFcFwdzPM3FgxGAQ==}
     engines: {node: '>= 10.13.0'}
 
   semver@6.3.1:
@@ -5776,21 +5778,21 @@ snapshots:
 
   '@tinyhttp/url@1.3.0': {}
 
-  '@trpc/client@11.1.0(@trpc/server@11.1.0(typescript@5.8.3))(typescript@5.8.3)':
+  '@trpc/client@11.1.0(@trpc/server@11.1.1(typescript@5.8.3))(typescript@5.8.3)':
     dependencies:
-      '@trpc/server': 11.1.0(typescript@5.8.3)
+      '@trpc/server': 11.1.1(typescript@5.8.3)
       typescript: 5.8.3
 
-  '@trpc/react-query@11.1.0(@tanstack/react-query@5.74.0(react@19.1.0))(@trpc/client@11.1.0(@trpc/server@11.1.0(typescript@5.8.3))(typescript@5.8.3))(@trpc/server@11.1.0(typescript@5.8.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)':
+  '@trpc/react-query@11.1.0(@tanstack/react-query@5.74.0(react@19.1.0))(@trpc/client@11.1.0(@trpc/server@11.1.1(typescript@5.8.3))(typescript@5.8.3))(@trpc/server@11.1.1(typescript@5.8.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)':
     dependencies:
       '@tanstack/react-query': 5.74.0(react@19.1.0)
-      '@trpc/client': 11.1.0(@trpc/server@11.1.0(typescript@5.8.3))(typescript@5.8.3)
-      '@trpc/server': 11.1.0(typescript@5.8.3)
+      '@trpc/client': 11.1.0(@trpc/server@11.1.1(typescript@5.8.3))(typescript@5.8.3)
+      '@trpc/server': 11.1.1(typescript@5.8.3)
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
       typescript: 5.8.3
 
-  '@trpc/server@11.1.0(typescript@5.8.3)':
+  '@trpc/server@11.1.1(typescript@5.8.3)':
     dependencies:
       typescript: 5.8.3
 
@@ -6575,7 +6577,7 @@ snapshots:
     dependencies:
       mime-db: 1.52.0
 
-  es-module-lexer@1.6.0: {}
+  es-module-lexer@1.7.0: {}
 
   es-object-atoms@1.1.1:
     dependencies:
@@ -7911,7 +7913,7 @@ snapshots:
 
   scheduler@0.26.0: {}
 
-  schema-utils@4.3.0:
+  schema-utils@4.3.2:
     dependencies:
       '@types/json-schema': 7.0.15
       ajv: 8.17.1
@@ -8159,7 +8161,7 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
-      schema-utils: 4.3.0
+      schema-utils: 4.3.2
       serialize-javascript: 6.0.2
       terser: 5.39.0
       webpack: 5.99.5(esbuild@0.19.12)
@@ -8353,7 +8355,7 @@ snapshots:
       browserslist: 4.24.4
       chrome-trace-event: 1.0.4
       enhanced-resolve: 5.18.1
-      es-module-lexer: 1.6.0
+      es-module-lexer: 1.7.0
       eslint-scope: 5.1.1
       events: 3.3.0
       glob-to-regexp: 0.4.1
@@ -8362,7 +8364,7 @@ snapshots:
       loader-runner: 4.3.0
       mime-types: 2.1.35
       neo-async: 2.6.2
-      schema-utils: 4.3.0
+      schema-utils: 4.3.2
       tapable: 2.2.1
       terser-webpack-plugin: 5.3.14(esbuild@0.19.12)(webpack@5.99.5(esbuild@0.19.12))
       watchpack: 2.4.2
