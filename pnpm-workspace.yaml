@@ -1,7 +1,10 @@
 onlyBuiltDependencies:
-  - "@clerk/shared"
-  - "@vercel/speed-insights"
-  - "@sentry/cli"
+  - '@clerk/shared'
+  - '@sentry/cli'
+  - '@tailwindcss/oxide'
+  - '@vercel/speed-insights'
   - core-js
   - esbuild
+  - msgpackr-extract
   - sharp
+  - unrs-resolver

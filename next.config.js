@@ -34,15 +34,20 @@ const nextConfig = {
       },
     ],
   },
+  reactStrictMode: true,
 };
 
 import withVercelToolbar from "@vercel/toolbar/plugins/next";
 
 const VercelToolbarConfig = withVercelToolbar()(nextConfig); // Das Soll so / mein got ich musste die Types absuchen für diese Scheiße
 
+import { createMDX } from "fumadocs-mdx/next";
+
+const FumaConfig = createMDX()(VercelToolbarConfig);
+
 // Injected content via Sentry wizard below
 
-export default withSentryConfig(VercelToolbarConfig, {
+export default withSentryConfig(FumaConfig, {
   // For all available options, see:
   // https://www.npmjs.com/package/@sentry/webpack-plugin#options
 
