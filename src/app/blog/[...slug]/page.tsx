@@ -8,6 +8,8 @@ import {
 import { notFound } from "next/navigation";
 import { createRelativeLink } from "fumadocs-ui/mdx";
 import { getMDXComponents } from "@/mdx-components";
+import { Button } from "~/components/ui/button";
+import Link from "next/link";
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -21,7 +23,7 @@ export default async function Page(props: {
   return (
     <DocsPage
       toc={page.data.toc}
-      full={page.data.full}
+      full={page.data.full ?? true}
       // editOnGithub={{
       //   owner: "jackatdjl",
       //   repo: "djl-homepage",
@@ -30,6 +32,13 @@ export default async function Page(props: {
       // }}
       footer={{ enabled: false }}
     >
+      <div className="px-4 py-2">
+        <Button variant="ghost" asChild>
+          <Link href="/blog" prefetch>
+            ← Back to Blog
+          </Link>
+        </Button>
+      </div>
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
