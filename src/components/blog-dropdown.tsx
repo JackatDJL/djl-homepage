@@ -10,24 +10,19 @@ import {
   CardTitle,
 } from "./ui/card";
 import { format } from "date-fns";
-import type { RouterOutput } from "~/trpc/server";
 import { Bouncy } from "ldrs/react";
 import "ldrs/react/Bouncy.css";
+import { api } from "~/trpc/react";
 
 interface BlogDropdownProps {
   isOpen: boolean;
-  loading: boolean;
-  posts: RouterOutput["blog"]["getPages"] | undefined;
   onClose: () => void; // Add onClose prop
 }
 
-export function BlogDropdown({
-  isOpen,
-  posts,
-  loading,
-  onClose,
-}: BlogDropdownProps) {
+export function BlogDropdown({ isOpen, onClose }: BlogDropdownProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const { data: posts, isLoading } = api.blog.getPosts.useQuery();
 
   useEffect(() => {
     if (isOpen && posts && posts.length > 1) {
@@ -38,7 +33,7 @@ export function BlogDropdown({
     }
   }, [isOpen, posts]);
 
-  if (loading || !posts) {
+  if (isLoading || !posts) {
     return (
       <AnimatePresence>
         {isOpen && (

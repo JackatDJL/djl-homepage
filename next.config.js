@@ -35,6 +35,10 @@ const nextConfig = {
     ],
   },
   reactStrictMode: true,
+  experimental: {
+    useCache: true,
+    // ppr: true,
+  },
 };
 
 import withVercelToolbar from "@vercel/toolbar/plugins/next";

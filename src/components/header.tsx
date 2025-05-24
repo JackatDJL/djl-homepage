@@ -10,7 +10,6 @@ import { AnimatedLogo } from "./animated-logo";
 import { ProjectDropdown } from "./project-dropdown";
 import { BlogDropdown } from "./blog-dropdown";
 import type { projects } from "~/server/db/schema/projects";
-import { api } from "~/trpc/react";
 
 interface HeaderProps {
   isDropdownEnabled?: boolean;
@@ -78,8 +77,6 @@ export default function Header({ isDropdownEnabled }: HeaderProps) {
       contributorIds: ["user1", "user6"],
     },
   ];
-
-  const { data: posts, isLoading } = api.blog.getPages.useQuery();
 
   // Function to close any active dropdown
   const closeDropdown = () => {
@@ -199,8 +196,6 @@ export default function Header({ isDropdownEnabled }: HeaderProps) {
               >
                 <BlogDropdown
                   isOpen={activeDropdown === "blog"}
-                  loading={isLoading}
-                  posts={posts}
                   onClose={closeDropdown} // Pass the closeDropdown function
                 />
               </div>

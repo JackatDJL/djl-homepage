@@ -41,10 +41,13 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "**/*.md",
+    "**/*.mdx",
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts",
-    "src/app/.well-known/**/*.ts"
+    "src/app/.well-known/**/*.ts",
+    "content/**/*.mdx",
   ],
   "exclude": ["node_modules"]
 }
