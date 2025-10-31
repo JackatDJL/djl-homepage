@@ -19,6 +19,7 @@ import { PostHogProvider } from "~/server/providers";
 import { env } from "~/env";
 import { VercelToolbar } from "@vercel/toolbar/next";
 import { dropdownHeaderFlag } from "~/server/flags";
+import { RootProvider } from "fumadocs-ui/provider";
 
 export const metadata: Metadata = {
   title:
@@ -123,20 +124,22 @@ export default async function RootLayout({
             <Analytics />
             <SpeedInsights />
             <TRPCReactProvider>
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-                disableTransitionOnChange
-              >
-                <Toaster />
-                <div className="bg-background text-foreground flex min-h-screen flex-col">
-                  <Header isDropdownEnabled={shouldShowHeaderDropdown} />
-                  <main className="flex-grow">{children}</main>
-                  <Footer />
-                </div>
-                {shouldShowVercelToolbar && <VercelToolbar />}
-              </ThemeProvider>
+              <RootProvider search={{ options: { type: "static" } }}>
+                <ThemeProvider
+                  attribute="class"
+                  defaultTheme="system"
+                  enableSystem
+                  disableTransitionOnChange
+                >
+                  <Toaster />
+                  <div className="bg-background text-foreground flex min-h-screen flex-col">
+                    <Header isDropdownEnabled={shouldShowHeaderDropdown} />
+                    <main className="flex-grow">{children}</main>
+                    <Footer />
+                  </div>
+                  {shouldShowVercelToolbar && <VercelToolbar />}
+                </ThemeProvider>
+              </RootProvider>
             </TRPCReactProvider>
           </PostHogProvider>
         </body>
