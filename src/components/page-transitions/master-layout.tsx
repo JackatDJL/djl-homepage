@@ -1,16 +1,26 @@
 "use client";
+
+import type { ReactNode } from "react";
+import Footer from "~c/footer";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef, useState } from "react";
-import FullScreenLogoLayer from "~c/page-transitions/full-screen-logo-layer";
+import FullScreenLogoLayer from "./full-screen-logo-layer";
+import HamburgerMenuButton from "./hamburger-menu";
 import { CustomEase } from "gsap/CustomEase";
 
 gsap.registerPlugin(CustomEase);
 gsap.registerPlugin(useGSAP);
 
-export default function Template({ children }: { children: React.ReactNode }) {
+interface MasterLayoutProps {
+  children: ReactNode;
+}
+
+export default function MasterLayout({ children }: MasterLayoutProps) {
   const containerRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuExit, setMenuExit] = useState(false);
 
   useGSAP(
     () => {
@@ -158,57 +168,24 @@ export default function Template({ children }: { children: React.ReactNode }) {
     { scope: containerRef, dependencies: [visible] }
   );
 
-  useGSAP(
-    () => {
-      const timeoutId = setTimeout(() => {
-        if (!visible) {
-          const tl = gsap.timeline();
-          setVisible(true);
-          tl.to(".page-content-layer-x", { z: 20 });
-          tl.to(".page-reveal-layer", { z: 10, visibility: "visible" }, "<");
-          tl.from(
-            ".page-content-layer-x",
-            {
-              duration: 1,
-              xPercent: -100,
-              ease: "sine.out",
-            },
-            0.5
-          ).fromTo(
-            ".page-content-layer-s",
-            {
-              backgroundColor: "#110e0c",
-              borderRadius: "1rem",
-              scale: 0.5,
-            },
-            {
-              duration: 1,
-              backgroundColor: "#0c0a09",
-              borderRadius: "0rem",
-              ease: CustomEase.create(
-                "custom",
-                "M0,0 C0.418,0 0.649,-0.018 0.729,0.022 0.888,0.102 1,0.811 1,1 "
-              ),
-              scale: 1,
-            },
-            "<"
-          );
-          tl.to(".page-reveal-layer", { z: -20, visibility: "hidden" }, ">");
-          tl.to(".page-content-layer-x", { z: 10 }, "<");
-        }
-      }, 1500);
-
-      return () => clearTimeout(timeoutId);
-    },
-    { scope: containerRef }
-  );
-
   return (
-    <section ref={containerRef} className="relative overflow-hidden">
+    <section
+      className="bg-background text-foreground flex min-h-screen flex-col relative overflow-hidden"
+      ref={containerRef}
+    >
+      <section className="page-header-layer fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 container mx-auto px-4 py-5">
+        <div className="text-2xl font-semibold">The DJL Foundation</div>
+        <HamburgerMenuButton
+          isOpen={menuOpen}
+          onClick={() => setMenuOpen(!menuOpen)}
+          exit={menuExit}
+        />
+      </section>
       <FullScreenLogoLayer className="page-reveal-layer" />
-      <main className="page-content-layer-x">
+      <main className="page-content-layer-x grow">
         <div className="page-content-layer-s w-screen h-max">{children}</div>
       </main>
+      <Footer />
     </section>
   );
 }

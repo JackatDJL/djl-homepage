@@ -3,13 +3,14 @@ import "~/styles/globals.css";
 import { VercelToolbar } from "@vercel/toolbar/next";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import Footer from "~/components/footer";
-import Header from "~/components/header";
+import Footer from "~c/footer";
+import Header from "~c/page-transitions/header";
 import { ThemeProvider } from "~/components/theme-provider";
 import { Toaster } from "~/components/ui/sonner";
-import { env } from "~/env";
+import { env } from "#env";
 import { dropdownHeaderFlag } from "~/server/flags";
 import { PostHogProvider } from "~/server/providers";
+import MasterLayout from "~c/page-transitions/master-layout";
 
 export const metadata: Metadata = {
   title:
@@ -101,7 +102,6 @@ export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const shouldShowVercelToolbar = env.NODE_ENV === "development";
-  const shouldShowHeaderDropdown = await dropdownHeaderFlag();
   return (
     <html lang="en" className={`${geist.variable}`}>
       <body>
@@ -113,11 +113,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             <Toaster />
-            <div className="bg-background text-foreground flex min-h-screen flex-col">
-              <Header isDropdownEnabled={shouldShowHeaderDropdown} />
-              <main className="grow">{children}</main>
-              <Footer />
-            </div>
+            <MasterLayout>{children}</MasterLayout>
             {shouldShowVercelToolbar && <VercelToolbar />}
           </ThemeProvider>
         </PostHogProvider>

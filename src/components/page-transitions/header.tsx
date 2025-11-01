@@ -4,9 +4,9 @@ import { motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "~ui/button";
-import { AnimatedLogo } from "./animated-logo";
-import { AnimatedText } from "./discontinued/animated-text";
-import { ThemeToggle } from "./theme-toggle";
+import { AnimatedLogo } from "../animated-logo";
+import { AnimatedText } from "../discontinued/animated-text";
+import { ThemeToggle } from "../theme-toggle";
 
 interface HeaderProps {
   isDropdownEnabled?: boolean;

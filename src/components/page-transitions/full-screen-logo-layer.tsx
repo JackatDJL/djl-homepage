@@ -15,10 +15,10 @@ export default function FullScreenLogoLayer({
       aria-hidden="true"
     >
       <Image
-        src="/logo.png"
+        src="/logo-unclipped.svg"
         alt="Logo"
-        width={200}
-        height={200}
+        width={500}
+        height={500}
         priority
         className="select-none"
       />

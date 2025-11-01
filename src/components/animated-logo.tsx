@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export function AnimatedLogo() {
   return (
-    <div className="relative z-50 h-10 w-10">
+    <div className="relative h-10 w-10">
       <motion.div initial={{ opacity: 1 }} animate={{ opacity: 1 }}>
         <Image
           src="/logo.png"
