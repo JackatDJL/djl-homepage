@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { ThemeToggle } from "./theme-toggle";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { motion } from "motion/react";
@@ -204,16 +203,6 @@ export default function Header({ isDropdownEnabled }: HeaderProps) {
         </nav>
         <div className="flex h-10 items-center space-x-2 print:hidden">
           <ThemeToggle />
-          <div className="relative h-10">
-            <SignedIn>
-              <UserButton showName appearance={{ ...userButtonAppearance }} />
-            </SignedIn>
-            <SignedOut>
-              <SignInButton mode="modal">
-                <Button>Sign In</Button>
-              </SignInButton>
-            </SignedOut>
-          </div>
         </div>
       </div>
     </header>

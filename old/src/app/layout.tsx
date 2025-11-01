@@ -7,14 +7,9 @@ import Header from "~/components/header";
 import Footer from "~/components/footer";
 import { ThemeProvider } from "~/components/theme-provider";
 
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-
 import { TRPCReactProvider } from "~/trpc/react";
 
-import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "~/components/ui/sonner";
-import { dark } from "@clerk/themes";
 import { PostHogProvider } from "~/server/providers";
 import { env } from "~/env";
 import { VercelToolbar } from "@vercel/toolbar/next";
@@ -113,37 +108,29 @@ export default async function RootLayout({
   const shouldShowVercelToolbar = env.NODE_ENV === "development";
   const shouldShowHeaderDropdown = await dropdownHeaderFlag();
   return (
-    <ClerkProvider
-      appearance={{
-        baseTheme: dark,
-      }}
-    >
-      <html lang="en" className={`${geist.variable}`}>
-        <body>
-          <PostHogProvider>
-            <Analytics />
-            <SpeedInsights />
-            <TRPCReactProvider>
-              <RootProvider search={{ options: { type: "static" } }}>
-                <ThemeProvider
-                  attribute="class"
-                  defaultTheme="system"
-                  enableSystem
-                  disableTransitionOnChange
-                >
-                  <Toaster />
-                  <div className="bg-background text-foreground flex min-h-screen flex-col">
-                    <Header isDropdownEnabled={shouldShowHeaderDropdown} />
-                    <main className="flex-grow">{children}</main>
-                    <Footer />
-                  </div>
-                  {shouldShowVercelToolbar && <VercelToolbar />}
-                </ThemeProvider>
-              </RootProvider>
-            </TRPCReactProvider>
-          </PostHogProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" className={`${geist.variable}`}>
+      <body>
+        <PostHogProvider>
+          <TRPCReactProvider>
+            <RootProvider search={{ options: { type: "static" } }}>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+              >
+                <Toaster />
+                <div className="bg-background text-foreground flex min-h-screen flex-col">
+                  <Header isDropdownEnabled={shouldShowHeaderDropdown} />
+                  <main className="grow">{children}</main>
+                  <Footer />
+                </div>
+                {shouldShowVercelToolbar && <VercelToolbar />}
+              </ThemeProvider>
+            </RootProvider>
+          </TRPCReactProvider>
+        </PostHogProvider>
+      </body>
+    </html>
   );
 }
