@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 // 1. Definition des Props-Interfaces
 interface SinusKurveProps {

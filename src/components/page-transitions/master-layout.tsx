@@ -20,7 +20,6 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
   const containerRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [menuExit, setMenuExit] = useState(false);
 
   useGSAP(
     () => {
@@ -178,7 +177,9 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
         <HamburgerMenuButton
           isOpen={menuOpen}
           onClick={() => setMenuOpen(!menuOpen)}
-          exit={menuExit}
+          exit={false}
+          orbitSpeed={4}
+          cursorInfluence={0.3}
         />
       </section>
       <FullScreenLogoLayer className="page-reveal-layer" />
