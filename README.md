@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The DJL Foundation Homepage
 
-## Getting Started
+Welcome to the official homepage of the DJL Foundation, a non-profit organization dedicated to empowering youth in robotics, computer science, and engineering across Northern Germany. Our mission is to foster talent, innovation, and education in STEM fields, shaping the future together.
 
-First, run the development server:
+## Über uns
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Die DJL Foundation ist ein gemeinnütziges Netzwerk, das sich der Förderung von Bildung und Innovation in den Bereichen Informationstechnologie, Robotik und Mechatronik verschrieben hat. Unser Ziel ist es, jungen Menschen in Norddeutschland die Möglichkeit zu geben, ihre Talente zu entdecken und weiterzuentwickeln.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Unsere Arbeit basiert auf der Überzeugung, dass Bildung und Zusammenarbeit der Schlüssel zu einer besseren Zukunft sind. Wir unterstützen Initiativen, organisieren Veranstaltungen wie Hackathons und Workshops und schaffen Plattformen, auf denen junge Talente ihre Fähigkeiten entfalten können.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Der Name DJL steht für "Digitales Jugend Lernzentrum" und spiegelt unser Ziel wider, ein Zentrum für Lernen und Innovation zu schaffen. Wir streben an, die DJL Foundation offiziell als gemeinnützige Organisation eintragen zu lassen und sie vom Finanzamt als gemeinnützig anerkennen zu lassen.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Unsere Mission
 
-## Learn More
+- **Jugend stärken**: Unterstützung junger Talente in Norddeutschland in den MINT-Bereichen.
+- **Innovation fördern**: Kreativität und Problemlösung durch Robotik und Informatik anregen.
+- **Gemeinschaft aufbauen**: Ein Netzwerk von Gleichgesinnten schaffen, die sich für Technologie und Bildung begeistern.
 
-To learn more about Next.js, take a look at the following resources:
+## Um ehrlich zu sein
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Wieso schreib ich eigendlich das noch in eine Readme?
+Lest euch mahl lieber die webseite durch
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+[>> Hier <<](https://djl.foundation)
 
-## Deploy on Vercel
+## Kontakt
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Für weitere Informationen besuchen Sie unsere Website oder kontaktieren Sie uns direkt:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Website: [https://djl.foundation](https://djl.foundation)
+- E-Mail: [contact@djl.foundation](mailto:contact@djl.foundation)
+- GitHub: [@djl-foundation](https://github.com/djl-foundation)
+
+Gemeinsam können wir die Zukunft gestalten.

@@ -19,6 +19,13 @@
       }
     ],
     "paths": {
+      "#env": ["./src/env.js"],
+      "~ui/*": ["./src/components/ui/*"],
+      "~c/*": ["./src/components/*"],
+      "~!": ["./src/lib/utils"],
+      "~l/*": ["./src/lib/*"],
+      "~h/*": ["./src/hooks/*"],
+      "§/*": ["./src/types/*"],
       "~/*": ["./src/*"]
     }
   },
@@ -30,5 +37,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "old.del"]
 }
