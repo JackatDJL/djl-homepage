@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * Hamburger Menu Button with Animated Waves and Icons
+ *
+ * Currently not in Use
+ */
+
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { forwardRef, useEffect, useRef, useState } from "react";

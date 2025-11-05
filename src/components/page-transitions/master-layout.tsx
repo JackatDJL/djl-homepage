@@ -6,11 +6,11 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef, useState } from "react";
 import FullScreenLogoLayer from "./full-screen-logo-layer";
-import HamburgerMenuButton from "./hamburger-menu";
 import { CustomEase } from "gsap/CustomEase";
+import HamburgerMenuButton from "./hamburger/hamburger-react";
+import { GSDevTools } from "gsap/GSDevTools";
 
-gsap.registerPlugin(CustomEase);
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(CustomEase, useGSAP, GSDevTools);
 
 interface MasterLayoutProps {
   children: ReactNode;
@@ -20,6 +20,9 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
   const containerRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [headerVisible, setHeaderVisible] = useState(true);
+
+  const renderButton = visible;
 
   useGSAP(
     () => {
@@ -27,6 +30,7 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
         const tl = gsap.timeline();
 
         setVisible(true);
+        1;
         tl.to(".page-content-layer-x", { z: 20 });
         tl.to(".page-reveal-layer", { z: 10, visibility: "visible" }, "<");
         tl.from(
@@ -147,6 +151,8 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
         pageHide: handlePageHide,
       };
 
+      // GSDevTools.create();
+
       console.log("🎬 Page Transitions available:");
       console.log("  window.pageTransitions.pageShow()");
       console.log("  window.pageTransitions.pageReveal()");
@@ -175,11 +181,9 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
       <section className="page-header-layer fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 container mx-auto px-4 py-5">
         <div className="text-2xl font-semibold">The DJL Foundation</div>
         <HamburgerMenuButton
-          isOpen={menuOpen}
-          onClick={() => setMenuOpen(!menuOpen)}
-          exit={false}
-          orbitSpeed={4}
-          cursorInfluence={0.3}
+          toggled={menuOpen}
+          onToggle={setMenuOpen}
+          visible={renderButton}
         />
       </section>
       <FullScreenLogoLayer className="page-reveal-layer" />
