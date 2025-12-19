@@ -6,7 +6,6 @@ type TransitionCallback = () => void | Promise<void>;
 
 interface ViewTransitionsCallbacks {
   onPageShow?: TransitionCallback;
-  onPageHide?: TransitionCallback;
 }
 
 // Extend Document interface to include startViewTransition
@@ -21,10 +20,7 @@ interface ViewTransitionDocument extends Document {
 /**
  * Hook to integrate View Transitions API with custom animations
  */
-export function useViewTransitions({
-  onPageShow,
-  onPageHide,
-}: ViewTransitionsCallbacks) {
+export function useViewTransitions({ onPageShow }: ViewTransitionsCallbacks) {
   useEffect(() => {
     // Check if View Transitions API is supported
     const isSupported =
