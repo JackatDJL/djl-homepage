@@ -123,7 +123,7 @@ export default function HamburgerMenuButton({
         stagger: 0.1,
         ease,
         onComplete: idleClosed,
-      }
+      },
     );
   });
 
@@ -145,7 +145,7 @@ export default function HamburgerMenuButton({
           duration: 1.5,
           ease: "sine.inOut",
         },
-        0
+        0,
       );
     });
   });
@@ -167,7 +167,7 @@ export default function HamburgerMenuButton({
         opacity: 1,
         duration: 0.5,
         ease,
-      }
+      },
     );
 
     // Add breathing pulse animation to arrow (75% scale as per spec)
@@ -264,7 +264,7 @@ export default function HamburgerMenuButton({
         stagger: 0.1,
         ease,
         onComplete: idleClosed,
-      }
+      },
     );
   });
   gsap.fromTo(
@@ -277,7 +277,7 @@ export default function HamburgerMenuButton({
       stagger: 0.1,
       ease,
       onComplete: idleClosed,
-    }
+    },
   );
   const hoverOnOpen = contextSafe(() => {
     idleTimeline.current?.pause();
@@ -286,7 +286,7 @@ export default function HamburgerMenuButton({
     gsap.fromTo(
       xRef.current,
       { scale: 0, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 0.4, ease }
+      { scale: 1, opacity: 1, duration: 0.4, ease },
     );
 
     // Add breathing pulse animation to X (75% scale as per spec)

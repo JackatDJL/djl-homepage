@@ -1,9 +1,19 @@
 import SinusKurve from "~c/page-transitions/sinuskurve";
+import Link from "next/link";
 
 function App() {
   return (
-    <div>
-      <h2>Sinuswelle mit Stärke 30 (niedrige Amplitude)</h2>
+    <div className="p-8">
+      <Link
+        href="/"
+        className="mb-8 inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+      >
+        ← Back to Home
+      </Link>
+
+      <h2 className="text-2xl font-bold mb-4">
+        Sinuswelle mit Stärke 30 (niedrige Amplitude)
+      </h2>
       <SinusKurve
         width={400}
         height={100}
@@ -12,7 +22,9 @@ function App() {
         color="teal"
       />
 
-      <h2>Sinuswelle mit Stärke 45 (hohe Amplitude)</h2>
+      <h2 className="text-2xl font-bold my-4">
+        Sinuswelle mit Stärke 45 (hohe Amplitude)
+      </h2>
       <SinusKurve
         width={400}
         height={100}

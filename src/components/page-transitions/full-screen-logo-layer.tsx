@@ -10,7 +10,7 @@ export default function FullScreenLogoLayer({
       {...props}
       className={cn(
         "fixed inset-0 flex items-center justify-center bg-black",
-        className
+        className,
       )}
       aria-hidden="true"
     >

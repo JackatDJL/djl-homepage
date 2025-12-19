@@ -81,7 +81,7 @@ export default function HamburgerMenuButton({
 
     const currentRotation = gsap.getProperty(
       flowerRef.current,
-      "rotate"
+      "rotate",
     ) as number;
 
     const direction = rotationDirectionRef.current;
@@ -134,7 +134,7 @@ export default function HamburgerMenuButton({
 
     const currentRotation = gsap.getProperty(
       flowerRef.current,
-      "rotate"
+      "rotate",
     ) as number;
 
     // Get opposite direction for the release animation
@@ -231,7 +231,7 @@ export default function HamburgerMenuButton({
           duration: 1.2, // Etwas schneller als Gesamtzeit für ein schnelles 'Einfliegen'
           ease: "power2.out",
         },
-        0
+        0,
       );
 
       // --- 2. Fast continuous rotation of border shape, slowing down at end (0.0s - 2.0s) ---
@@ -246,7 +246,7 @@ export default function HamburgerMenuButton({
             startContinuousRotation();
           },
         },
-        0
+        0,
       );
 
       // --- 3. Shape morphing sequence: rect -> triangle -> circle -> rect (0.1s - 1.8s) ---
@@ -274,7 +274,7 @@ export default function HamburgerMenuButton({
             duration: 0.3,
             ease: "power2.inOut",
           },
-          0.6
+          0.6,
         ); // Endet bei 0.9s
 
         // Morph circle -> rect (final shape)
@@ -285,14 +285,14 @@ export default function HamburgerMenuButton({
             duration: 0.5, // Längere Dauer am Ende
             ease: "power2.inOut",
           },
-          1.3
+          1.3,
         ); // Endet bei 1.8s
       }
 
       // --- 4. Counter-clockwise rotation of hamburger icon (0.0s - 2.0s) ---
       // ZUSTANDS-OVERWRITE HIER KOMPLETT ENTFERNT
       const hamburgerContainer = wrapperRef.current?.querySelector(
-        ".hamburger-icon-container"
+        ".hamburger-icon-container",
       );
       if (hamburgerContainer) {
         tl.to(
@@ -302,7 +302,7 @@ export default function HamburgerMenuButton({
             duration: 2.0, // Läuft über die gesamte Zeit
             ease: "power2.out",
           },
-          0
+          0,
         ); // Startet bei 0
       }
 
