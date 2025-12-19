@@ -18,6 +18,15 @@ interface MasterLayoutProps {
   children: ReactNode;
 }
 
+/**
+ * Wrap a GSAP timeline in a Promise that resolves when the animation completes
+ */
+function timelineToPromise(timeline: gsap.core.Timeline): Promise<void> {
+  return new Promise<void>((resolve) => {
+    timeline.eventCallback("onComplete", () => resolve());
+  });
+}
+
 export default function MasterLayout({ children }: MasterLayoutProps) {
   const containerRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
@@ -28,83 +37,83 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
 
   const renderButton = visible;
 
+  // Create reusable animation functions
+  const createShowAnimation = () => {
+    const tl = gsap.timeline();
+    setVisible(true);
+    tl.to(".page-content-layer-x", { z: 20 });
+    tl.to(".page-reveal-layer", { z: 10, visibility: "visible" }, "<");
+    tl.from(
+      ".page-content-layer-x",
+      {
+        duration: 1,
+        xPercent: -100,
+        ease: "sine.out",
+      },
+      0.5,
+    ).fromTo(
+      ".page-content-layer-s",
+      {
+        backgroundColor: "#110e0c",
+        borderRadius: "1rem",
+        scale: 0.5,
+      },
+      {
+        duration: 1,
+        backgroundColor: "#0c0a09",
+        borderRadius: "0rem",
+        ease: CustomEase.create(
+          "custom",
+          "M0,0 C0.418,0 0.649,-0.018 0.729,0.022 0.888,0.102 1,0.811 1,1 ",
+        ),
+        scale: 1,
+      },
+      "<",
+    );
+    tl.to(".page-reveal-layer", { z: -20, visibility: "hidden" }, ">");
+    tl.to(".page-content-layer-x", { z: 10 }, "<");
+    return tl;
+  };
+
+  const createHideAnimation = () => {
+    const tl = gsap.timeline();
+    setVisible(false);
+    tl.to(".page-content-layer-x", { z: 20 });
+    tl.to(".page-reveal-layer", { z: 10, visibility: "visible" }, "<");
+    tl.to(
+      ".page-content-layer-x",
+      {
+        duration: 1,
+        xPercent: 100,
+        ease: "sine.in",
+      },
+      0.5,
+    ).fromTo(
+      ".page-content-layer-s",
+      {
+        backgroundColor: "#0c0a09",
+        borderRadius: "0rem",
+        scale: 1,
+      },
+      {
+        duration: 1,
+        backgroundColor: "#110e0c",
+        borderRadius: "1rem",
+        ease: CustomEase.create(
+          "custom",
+          "M0,0 C0,0.189 0.112,0.898 0.271,0.978 0.351,1.018 0.582,1 1,1 ",
+        ),
+        scale: 0.5,
+      },
+      "<",
+    );
+    return tl;
+  };
+
   useGSAP(
     () => {
-      const handlePageShow = () => {
-        const tl = gsap.timeline();
-
-        setVisible(true);
-        tl.to(".page-content-layer-x", { z: 20 });
-        tl.to(".page-reveal-layer", { z: 10, visibility: "visible" }, "<");
-        tl.from(
-          ".page-content-layer-x",
-          {
-            duration: 1,
-            xPercent: -100,
-            ease: "sine.out",
-          },
-          0.5,
-        ).fromTo(
-          ".page-content-layer-s",
-          {
-            backgroundColor: "#110e0c",
-            borderRadius: "1rem",
-            scale: 0.5,
-          },
-          {
-            duration: 1,
-            backgroundColor: "#0c0a09",
-            borderRadius: "0rem",
-            ease: CustomEase.create(
-              "custom",
-              "M0,0 C0.418,0 0.649,-0.018 0.729,0.022 0.888,0.102 1,0.811 1,1 ",
-            ),
-            scale: 1,
-          },
-          "<",
-        );
-        tl.to(".page-reveal-layer", { z: -20, visibility: "hidden" }, ">");
-        tl.to(".page-content-layer-x", { z: 10 }, "<");
-
-        return tl;
-      };
-
-      const handlePageHide = () => {
-        const tl = gsap.timeline();
-
-        setVisible(false);
-        tl.to(".page-content-layer-x", { z: 20 });
-        tl.to(".page-reveal-layer", { z: 10, visibility: "visible" }, "<");
-        tl.to(
-          ".page-content-layer-x",
-          {
-            duration: 1,
-            xPercent: 100,
-            ease: "sine.in",
-          },
-          0.5,
-        ).fromTo(
-          ".page-content-layer-s",
-          {
-            backgroundColor: "#0c0a09",
-            borderRadius: "0rem",
-            scale: 1,
-          },
-          {
-            duration: 1,
-            backgroundColor: "#110e0c",
-            borderRadius: "1rem",
-            ease: CustomEase.create(
-              "custom",
-              "M0,0 C0,0.189 0.112,0.898 0.271,0.978 0.351,1.018 0.582,1 1,1 ",
-            ),
-            scale: 0.5,
-          },
-          "<",
-        );
-
-        return tl;
-      };
+      const handlePageShow = () => createShowAnimation();
+      const handlePageHide = () => createHideAnimation();
 
       // Expose to window for debugging
       // biome-ignore lint/suspicious/noExplicitAny: needed for window debugging
@@ -129,7 +138,49 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
   useEffect(() => {
     if (isInitialLoad) {
       setIsInitialLoad(false);
-      // Trigger initial animation
+      createShowAnimation();
+    }
+  }, [isInitialLoad]);
+
+  // Use View Transitions API for navigation
+  useNextViewTransitions({
+    onTransitionStart: async () => {
+      // Play hide animation when navigating away (faster version)
+      const tl = gsap.timeline();
+      setVisible(false);
+      tl.to(".page-content-layer-x", { z: 20 });
+      tl.to(".page-reveal-layer", { z: 10, visibility: "visible" }, "<");
+      tl.to(
+        ".page-content-layer-x",
+        {
+          duration: 0.6,
+          xPercent: 100,
+          ease: "sine.in",
+        },
+        0.3,
+      ).fromTo(
+        ".page-content-layer-s",
+        {
+          backgroundColor: "#0c0a09",
+          borderRadius: "0rem",
+          scale: 1,
+        },
+        {
+          duration: 0.6,
+          backgroundColor: "#110e0c",
+          borderRadius: "1rem",
+          ease: CustomEase.create(
+            "custom",
+            "M0,0 C0,0.189 0.112,0.898 0.271,0.978 0.351,1.018 0.582,1 1,1 ",
+          ),
+          scale: 0.5,
+        },
+        "<",
+      );
+      await timelineToPromise(tl);
+    },
+    onTransitionEnd: async () => {
+      // Play show animation when new page loads (faster version)
       const tl = gsap.timeline();
       setVisible(true);
       tl.to(".page-content-layer-x", { z: 20 });
@@ -137,11 +188,11 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
       tl.from(
         ".page-content-layer-x",
         {
-          duration: 1,
+          duration: 0.6,
           xPercent: -100,
           ease: "sine.out",
         },
-        0.5,
+        0.3,
       ).fromTo(
         ".page-content-layer-s",
         {
@@ -150,7 +201,7 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
           scale: 0.5,
         },
         {
-          duration: 1,
+          duration: 0.6,
           backgroundColor: "#0c0a09",
           borderRadius: "0rem",
           ease: CustomEase.create(
@@ -163,88 +214,7 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
       );
       tl.to(".page-reveal-layer", { z: -20, visibility: "hidden" }, ">");
       tl.to(".page-content-layer-x", { z: 10 }, "<");
-    }
-  }, [isInitialLoad]);
-
-  // Use View Transitions API for navigation
-  useNextViewTransitions({
-    onTransitionStart: async () => {
-      // Play hide animation when navigating away
-      await new Promise<void>((resolve) => {
-        const tl = gsap.timeline({
-          onComplete: () => resolve(),
-        });
-        setVisible(false);
-        tl.to(".page-content-layer-x", { z: 20 });
-        tl.to(".page-reveal-layer", { z: 10, visibility: "visible" }, "<");
-        tl.to(
-          ".page-content-layer-x",
-          {
-            duration: 0.6,
-            xPercent: 100,
-            ease: "sine.in",
-          },
-          0.3,
-        ).fromTo(
-          ".page-content-layer-s",
-          {
-            backgroundColor: "#0c0a09",
-            borderRadius: "0rem",
-            scale: 1,
-          },
-          {
-            duration: 0.6,
-            backgroundColor: "#110e0c",
-            borderRadius: "1rem",
-            ease: CustomEase.create(
-              "custom",
-              "M0,0 C0,0.189 0.112,0.898 0.271,0.978 0.351,1.018 0.582,1 1,1 ",
-            ),
-            scale: 0.5,
-          },
-          "<",
-        );
-      });
-    },
-    onTransitionEnd: async () => {
-      // Play show animation when new page loads
-      await new Promise<void>((resolve) => {
-        const tl = gsap.timeline({
-          onComplete: () => resolve(),
-        });
-        setVisible(true);
-        tl.to(".page-content-layer-x", { z: 20 });
-        tl.to(".page-reveal-layer", { z: 10, visibility: "visible" }, "<");
-        tl.from(
-          ".page-content-layer-x",
-          {
-            duration: 0.6,
-            xPercent: -100,
-            ease: "sine.out",
-          },
-          0.3,
-        ).fromTo(
-          ".page-content-layer-s",
-          {
-            backgroundColor: "#110e0c",
-            borderRadius: "1rem",
-            scale: 0.5,
-          },
-          {
-            duration: 0.6,
-            backgroundColor: "#0c0a09",
-            borderRadius: "0rem",
-            ease: CustomEase.create(
-              "custom",
-              "M0,0 C0.418,0 0.649,-0.018 0.729,0.022 0.888,0.102 1,0.811 1,1 ",
-            ),
-            scale: 1,
-          },
-          "<",
-        );
-        tl.to(".page-reveal-layer", { z: -20, visibility: "hidden" }, ">");
-        tl.to(".page-content-layer-x", { z: 10 }, "<");
-      });
+      await timelineToPromise(tl);
     },
   });
 

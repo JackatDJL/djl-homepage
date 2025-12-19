@@ -52,7 +52,7 @@ export function useViewTransitions({
 
     // Run on initial load
     handlePageShow();
-  }, [onPageShow, onPageHide]);
+  }, [onPageShow]);
 }
 
 /**
