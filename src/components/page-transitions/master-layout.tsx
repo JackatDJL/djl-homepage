@@ -4,11 +4,13 @@ import type { ReactNode } from "react";
 import Footer from "~c/footer";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import FullScreenLogoLayer from "./full-screen-logo-layer";
 import { CustomEase } from "gsap/CustomEase";
 import HamburgerMenuButton from "./hamburger/hamburger-react";
 import { GSDevTools } from "gsap/GSDevTools";
+import { useNextViewTransitions } from "~/lib/use-next-view-transitions";
+import { usePathname } from "next/navigation";
 
 gsap.registerPlugin(CustomEase, useGSAP, GSDevTools);
 
@@ -21,6 +23,8 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
   const [visible, setVisible] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [headerVisible, setHeaderVisible] = useState(true);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const pathname = usePathname();
 
   const renderButton = visible;
 
@@ -30,7 +34,6 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
         const tl = gsap.timeline();
 
         setVisible(true);
-        1;
         tl.to(".page-content-layer-x", { z: 20 });
         tl.to(".page-reveal-layer", { z: 10, visibility: "visible" }, "<");
         tl.from(
@@ -40,7 +43,7 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
             xPercent: -100,
             ease: "sine.out",
           },
-          0.5
+          0.5,
         ).fromTo(
           ".page-content-layer-s",
           {
@@ -54,50 +57,11 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
             borderRadius: "0rem",
             ease: CustomEase.create(
               "custom",
-              "M0,0 C0.418,0 0.649,-0.018 0.729,0.022 0.888,0.102 1,0.811 1,1 "
+              "M0,0 C0.418,0 0.649,-0.018 0.729,0.022 0.888,0.102 1,0.811 1,1 ",
             ),
             scale: 1,
           },
-          "<"
-        );
-        tl.to(".page-reveal-layer", { z: -20, visibility: "hidden" }, ">");
-        tl.to(".page-content-layer-x", { z: 10 }, "<");
-
-        return tl;
-      };
-
-      const handlePageReveal = () => {
-        const tl = gsap.timeline();
-
-        setVisible(true);
-        tl.to(".page-content-layer-x", { z: 20 });
-        tl.to(".page-reveal-layer", { z: 10, visibility: "visible" }, "<");
-        tl.from(
-          ".page-content-layer-x",
-          {
-            duration: 1,
-            xPercent: -100,
-            ease: "sine.out",
-          },
-          0.5
-        ).fromTo(
-          ".page-content-layer-s",
-          {
-            backgroundColor: "#110e0c",
-            borderRadius: "1rem",
-            scale: 0.5,
-          },
-          {
-            duration: 1,
-            backgroundColor: "#0c0a09",
-            borderRadius: "0rem",
-            ease: CustomEase.create(
-              "custom",
-              "M0,0 C0.418,0 0.649,-0.018 0.729,0.022 0.888,0.102 1,0.811 1,1 "
-            ),
-            scale: 1,
-          },
-          "<"
+          "<",
         );
         tl.to(".page-reveal-layer", { z: -20, visibility: "hidden" }, ">");
         tl.to(".page-content-layer-x", { z: 10 }, "<");
@@ -118,7 +82,7 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
             xPercent: 100,
             ease: "sine.in",
           },
-          0.5
+          0.5,
         ).fromTo(
           ".page-content-layer-s",
           {
@@ -132,13 +96,12 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
             borderRadius: "1rem",
             ease: CustomEase.create(
               "custom",
-              "M0,0 C0,0.189 0.112,0.898 0.271,0.978 0.351,1.018 0.582,1 1,1 "
+              "M0,0 C0,0.189 0.112,0.898 0.271,0.978 0.351,1.018 0.582,1 1,1 ",
             ),
             scale: 0.5,
           },
-          "<"
+          "<",
         );
-        // No internal cleanup, router death imminent
 
         return tl;
       };
@@ -147,31 +110,138 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
       // biome-ignore lint/suspicious/noExplicitAny: needed for window debugging
       (window as any).pageTransitions = {
         pageShow: handlePageShow,
-        pageReveal: handlePageReveal,
         pageHide: handlePageHide,
       };
 
-      // GSDevTools.create();
-
       console.log("🎬 Page Transitions available:");
       console.log("  window.pageTransitions.pageShow()");
-      console.log("  window.pageTransitions.pageReveal()");
       console.log("  window.pageTransitions.pageHide()");
 
-      window.addEventListener("pageshow", handlePageShow);
-      window.addEventListener("pagereveal", handlePageReveal);
-      window.addEventListener("pagehide", handlePageHide);
-
       return () => {
-        window.removeEventListener("pageshow", handlePageShow);
-        window.removeEventListener("pagereveal", handlePageReveal);
-        window.removeEventListener("pagehide", handlePageHide);
         // biome-ignore lint/suspicious/noExplicitAny: needed for window debugging
         delete (window as any).pageTransitions;
       };
     },
-    { scope: containerRef, dependencies: [visible] }
+    { scope: containerRef, dependencies: [visible] },
   );
+
+  // Handle initial page load animation
+  useEffect(() => {
+    if (isInitialLoad) {
+      setIsInitialLoad(false);
+      // Trigger initial animation
+      const tl = gsap.timeline();
+      setVisible(true);
+      tl.to(".page-content-layer-x", { z: 20 });
+      tl.to(".page-reveal-layer", { z: 10, visibility: "visible" }, "<");
+      tl.from(
+        ".page-content-layer-x",
+        {
+          duration: 1,
+          xPercent: -100,
+          ease: "sine.out",
+        },
+        0.5,
+      ).fromTo(
+        ".page-content-layer-s",
+        {
+          backgroundColor: "#110e0c",
+          borderRadius: "1rem",
+          scale: 0.5,
+        },
+        {
+          duration: 1,
+          backgroundColor: "#0c0a09",
+          borderRadius: "0rem",
+          ease: CustomEase.create(
+            "custom",
+            "M0,0 C0.418,0 0.649,-0.018 0.729,0.022 0.888,0.102 1,0.811 1,1 ",
+          ),
+          scale: 1,
+        },
+        "<",
+      );
+      tl.to(".page-reveal-layer", { z: -20, visibility: "hidden" }, ">");
+      tl.to(".page-content-layer-x", { z: 10 }, "<");
+    }
+  }, [isInitialLoad]);
+
+  // Use View Transitions API for navigation
+  useNextViewTransitions({
+    onTransitionStart: async () => {
+      // Play hide animation when navigating away
+      const tl = gsap.timeline();
+      setVisible(false);
+      tl.to(".page-content-layer-x", { z: 20 });
+      tl.to(".page-reveal-layer", { z: 10, visibility: "visible" }, "<");
+      tl.to(
+        ".page-content-layer-x",
+        {
+          duration: 0.6,
+          xPercent: 100,
+          ease: "sine.in",
+        },
+        0.3,
+      ).fromTo(
+        ".page-content-layer-s",
+        {
+          backgroundColor: "#0c0a09",
+          borderRadius: "0rem",
+          scale: 1,
+        },
+        {
+          duration: 0.6,
+          backgroundColor: "#110e0c",
+          borderRadius: "1rem",
+          ease: CustomEase.create(
+            "custom",
+            "M0,0 C0,0.189 0.112,0.898 0.271,0.978 0.351,1.018 0.582,1 1,1 ",
+          ),
+          scale: 0.5,
+        },
+        "<",
+      );
+      // Wait for animation to complete
+      await tl.then();
+    },
+    onTransitionEnd: async () => {
+      // Play show animation when new page loads
+      const tl = gsap.timeline();
+      setVisible(true);
+      tl.to(".page-content-layer-x", { z: 20 });
+      tl.to(".page-reveal-layer", { z: 10, visibility: "visible" }, "<");
+      tl.from(
+        ".page-content-layer-x",
+        {
+          duration: 0.6,
+          xPercent: -100,
+          ease: "sine.out",
+        },
+        0.3,
+      ).fromTo(
+        ".page-content-layer-s",
+        {
+          backgroundColor: "#110e0c",
+          borderRadius: "1rem",
+          scale: 0.5,
+        },
+        {
+          duration: 0.6,
+          backgroundColor: "#0c0a09",
+          borderRadius: "0rem",
+          ease: CustomEase.create(
+            "custom",
+            "M0,0 C0.418,0 0.649,-0.018 0.729,0.022 0.888,0.102 1,0.811 1,1 ",
+          ),
+          scale: 1,
+        },
+        "<",
+      );
+      tl.to(".page-reveal-layer", { z: -20, visibility: "hidden" }, ">");
+      tl.to(".page-content-layer-x", { z: 10 }, "<");
+      await tl.then();
+    },
+  });
 
   return (
     <section

@@ -120,3 +120,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Enable View Transitions API */
+@view-transition {
+  navigation: auto;
+}
