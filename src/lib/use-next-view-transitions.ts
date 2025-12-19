@@ -8,6 +8,15 @@ interface PageTransitionHandlers {
   onTransitionEnd?: () => void | Promise<void>;
 }
 
+// Extend Document interface to include startViewTransition
+interface ViewTransitionDocument extends Document {
+  startViewTransition?: (callback: () => void | Promise<void>) => {
+    finished: Promise<void>;
+    ready: Promise<void>;
+    updateCallbackDone: Promise<void>;
+  };
+}
+
 /**
  * Hook to handle View Transitions API with Next.js navigation
  * This intercepts Link clicks and programmatic navigation to use View Transitions API
@@ -22,6 +31,7 @@ export function useNextViewTransitions({
 
   useEffect(() => {
     // Check if View Transitions API is supported
+    const doc = document as ViewTransitionDocument;
     const isSupported =
       typeof document !== "undefined" && "startViewTransition" in document;
 
@@ -69,19 +79,20 @@ export function useNextViewTransitions({
       // Prevent default navigation
       e.preventDefault();
 
-      // Start view transition
-      // @ts-ignore - startViewTransition is not in TypeScript types yet
-      document.startViewTransition(async () => {
-        // Run transition start callback
-        if (onTransitionStart) {
-          await onTransitionStart();
-        }
+      // Start view transition with proper typing
+      if (doc.startViewTransition) {
+        doc.startViewTransition(async () => {
+          // Run transition start callback
+          if (onTransitionStart) {
+            await onTransitionStart();
+          }
 
-        // Navigate using Next.js router
-        startTransition(() => {
-          router.push(href);
+          // Navigate using Next.js router
+          startTransition(() => {
+            router.push(href);
+          });
         });
-      });
+      }
     };
 
     document.addEventListener("click", handleLinkClick);

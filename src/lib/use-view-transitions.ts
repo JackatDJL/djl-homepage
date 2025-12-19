@@ -9,6 +9,15 @@ interface ViewTransitionsCallbacks {
   onPageHide?: TransitionCallback;
 }
 
+// Extend Document interface to include startViewTransition
+interface ViewTransitionDocument extends Document {
+  startViewTransition?: (callback: () => void | Promise<void>) => {
+    finished: Promise<void>;
+    ready: Promise<void>;
+    updateCallbackDone: Promise<void>;
+  };
+}
+
 /**
  * Hook to integrate View Transitions API with custom animations
  */
@@ -28,11 +37,11 @@ export function useViewTransitions({
     }
 
     // Handle initial page load
+    const doc = document as ViewTransitionDocument;
     const handlePageShow = async () => {
-      if (isSupported && onPageShow) {
+      if (isSupported && onPageShow && doc.startViewTransition) {
         // Use View Transitions API for smooth animations
-        // @ts-ignore - startViewTransition is not in TypeScript types yet
-        document.startViewTransition(async () => {
+        doc.startViewTransition(async () => {
           await onPageShow();
         });
       } else if (onPageShow) {
@@ -43,19 +52,6 @@ export function useViewTransitions({
 
     // Run on initial load
     handlePageShow();
-
-    // Handle navigation events for page transitions
-    const handleBeforeUnload = () => {
-      if (onPageHide) {
-        onPageHide();
-      }
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
   }, [onPageShow, onPageHide]);
 }
 
@@ -63,9 +59,9 @@ export function useViewTransitions({
  * Start a view transition programmatically
  */
 export function startViewTransition(callback: () => void | Promise<void>) {
-  if (typeof document !== "undefined" && "startViewTransition" in document) {
-    // @ts-ignore - startViewTransition is not in TypeScript types yet
-    return document.startViewTransition(callback);
+  const doc = document as ViewTransitionDocument;
+  if (typeof document !== "undefined" && doc.startViewTransition) {
+    return doc.startViewTransition(callback);
   }
   // Fallback: just run the callback
   return callback();
