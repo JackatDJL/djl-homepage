@@ -1,58 +1,12 @@
-import { FlatCompat } from "@eslint/eslintrc";
-import tseslint from 'typescript-eslint';
-// @ts-ignore -- no types for this plugin
-import drizzle from "eslint-plugin-drizzle";
-
-const compat = new FlatCompat({
-  baseDirectory: import.meta.dirname,
-});
+import js from "@eslint/js";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
+import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  {
-		ignores: ['.next']
-	},
-  ...compat.extends("next/core-web-vitals"),
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-    plugins: {
-      drizzle,
-    },
-		extends: [
-			...tseslint.configs.recommended,
-			...tseslint.configs.recommendedTypeChecked,
-			...tseslint.configs.stylisticTypeChecked
-		],
-      rules: {
-    "@typescript-eslint/array-type": "off",
-    "@typescript-eslint/consistent-type-definitions": "off",
-    "@typescript-eslint/consistent-type-imports": [
-      "warn",
-      { prefer: "type-imports", fixStyle: "inline-type-imports" },
-    ],
-    "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
-    "@typescript-eslint/require-await": "off",
-    "@typescript-eslint/no-misused-promises": [
-      "error",
-      { checksVoidReturn: { attributes: false } },
-    ],
-    "drizzle/enforce-delete-with-where": [
-      "error",
-      { drizzleObjectName: ["db", "ctx.db"] },
-    ],
-    "drizzle/enforce-update-with-where": [
-      "error",
-      { drizzleObjectName: ["db", "ctx.db"] },
-    ],
-  },
-  },
-  {
-		linterOptions: {
-			reportUnusedDisableDirectives: true
-		},
-		languageOptions: {
-			parserOptions: {
-				projectService: true
-			}
-		}
-	}
-)
+  { ignores: [".output", "dist", "node_modules", "src/routeTree.gen.ts"] },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  reactHooks.configs.flat["recommended-latest"],
+  reactRefresh.configs.vite,
+);

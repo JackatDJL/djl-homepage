@@ -1,43 +1,26 @@
 {
   "compilerOptions": {
-    /* Base Options: */
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "target": "es2022",
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "moduleDetection": "force",
-    "isolatedModules": true,
-    "verbatimModuleSyntax": true,
-
-    /* Strictness */
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "checkJs": true,
-
-    /* Bundled projects */
-    "lib": ["dom", "dom.iterable", "ES2022"],
-    "noEmit": true,
+    "target": "ES2022",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "jsx": "preserve",
-    "plugins": [{ "name": "next" }],
-    "incremental": true,
-
-    /* Path Aliases */
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
     "baseUrl": ".",
-    "paths": {
-      "~/*": ["./src/*"]
-    }
+    "paths": { "~/*": ["./src/*"] }
   },
   "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.cjs",
-    "**/*.js",
-    ".next/types/**/*.ts",
-    "src/app/.well-known/**/*.ts"
-  ],
-  "exclude": ["node_modules"]
+    "src/routes/**/*.ts",
+    "src/routes/**/*.tsx",
+    "src/content/**/*.ts",
+    "src/components/site/**/*.tsx",
+    "src/routeTree.gen.ts",
+    "src/vite-env.d.ts",
+    "vite.config.ts"
+  ]
 }

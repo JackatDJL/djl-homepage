@@ -1,34 +1,25 @@
-# The DJL Foundation Homepage
+# DJL Foundation
 
-Welcome to the official homepage of the DJL Foundation, a non-profit organization dedicated to empowering youth in robotics, computer science, and engineering across Northern Germany. Our mission is to foster talent, innovation, and education in STEM fields, shaping the future together.
+The public site for DJL Foundation, an independent project umbrella and archive created by Jack Ruder.
 
-## Über uns
+DJL Foundation is not currently a formally incorporated foundation or registered association.
 
-Die DJL Foundation ist ein gemeinnütziges Netzwerk, das sich der Förderung von Bildung und Innovation in den Bereichen Informationstechnologie, Robotik und Mechatronik verschrieben hat. Unser Ziel ist es, jungen Menschen in Norddeutschland die Möglichkeit zu geben, ihre Talente zu entdecken und weiterzuentwickeln.
+## Stack
 
-Unsere Arbeit basiert auf der Überzeugung, dass Bildung und Zusammenarbeit der Schlüssel zu einer besseren Zukunft sind. Wir unterstützen Initiativen, organisieren Veranstaltungen wie Hackathons und Workshops und schaffen Plattformen, auf denen junge Talente ihre Fähigkeiten entfalten können.
+- TanStack Start
+- React and TypeScript
+- Tailwind CSS
+- Nitro with a Vercel-compatible configuration
 
-Der Name DJL steht für "Digitales Jugend Lernzentrum" und spiegelt unser Ziel wider, ein Zentrum für Lernen und Innovation zu schaffen. Wir streben an, die DJL Foundation offiziell als gemeinnützige Organisation eintragen zu lassen und sie vom Finanzamt als gemeinnützig anerkennen zu lassen.
+## Local development
 
-## Unsere Mission
+```sh
+bun install
+bun run dev
+```
 
-- **Jugend stärken**: Unterstützung junger Talente in Norddeutschland in den MINT-Bereichen.
-- **Innovation fördern**: Kreativität und Problemlösung durch Robotik und Informatik anregen.
-- **Gemeinschaft aufbauen**: Ein Netzwerk von Gleichgesinnten schaffen, die sich für Technologie und Bildung begeistern.
+Run `bun run build`, `bun run typecheck`, and `bun run lint` before publishing.
 
-## Um ehrlich zu sein
+## Editing the catalogue
 
-Wieso schreib ich eigendlich das noch in eine Readme?
-Lest euch mahl lieber die webseite durch
-
-[>> Hier <<](https://djl.foundation)
-
-## Kontakt
-
-Für weitere Informationen besuchen Sie unsere Website oder kontaktieren Sie uns direkt:
-
-- Website: [https://djl.foundation](https://djl.foundation)
-- E-Mail: [contact@djl.foundation](mailto:contact@djl.foundation)
-- GitHub: [@djl-foundation](https://github.com/djl-foundation)
-
-Gemeinsam können wir die Zukunft gestalten.
+Project records live in [src/content/projects.ts](src/content/projects.ts). Add a typed entry there. Keep unknown dates, statuses, and links explicit instead of guessing.

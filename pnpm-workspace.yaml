@@ -1,7 +1,0 @@
-onlyBuiltDependencies:
-  - "@clerk/shared"
-  - "@vercel/speed-insights"
-  - "@sentry/cli"
-  - core-js
-  - esbuild
-  - sharp
