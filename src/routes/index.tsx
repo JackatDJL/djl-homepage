@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { ProjectCard } from "../components/site/project-card";
-import { selectedProjects } from "../content/projects";
+import { ProjectEntry } from "../components/site/project-card";
+import { projectHistory } from "../content/projects";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [{ title: "DJL Foundation" }] }),
@@ -10,45 +10,43 @@ export const Route = createFileRoute("/")({
 function Home() {
   return (
     <>
-      <section className="hero" aria-labelledby="home-title">
-        <p className="eyebrow">PROJECT UMBRELLA / EUROPE</p>
-        <h1 id="home-title">A home for work that was worth trying.</h1>
-        <p className="hero-copy">
-          DJL Foundation is an independent project umbrella and archive created by Jack Ruder.
-          It holds work around technology, education, and civic experimentation.
-        </p>
-        <aside className="legal-note">
-          <strong>For clarity.</strong> DJL Foundation is not currently a formally incorporated
-          foundation or registered association.
-        </aside>
-        <div className="hero-actions">
-          <Link className="button button-primary" to="/projects">Browse projects</Link>
-          <Link className="button button-quiet" to="/about">Read the background</Link>
+      <section className="home-intro" aria-labelledby="home-title">
+        <div className="home-mark" aria-hidden="true">
+          <img src="/logo.png" alt="" width="180" height="180" />
+        </div>
+        <div>
+          <h1 id="home-title">DJL Foundation</h1>
+          <p className="lead">
+            DJL Foundation is Jack Ruder's project umbrella for work in software,
+            robotics, technical youth education, and civic projects.
+          </p>
+          <p>
+            It began with local work around Hack Club and technical education.
+            Over time, teams, websites, games, events, and organisation ideas used
+            the name. Some continued. Some stopped. Some became separate projects.
+          </p>
+          <p className="quiet-disclaimer">
+            DJL Foundation is not a formally incorporated foundation or registered association.
+          </p>
         </div>
       </section>
 
-      <section className="section selected-section" aria-labelledby="selected-title">
-        <div className="section-heading">
-          <p className="eyebrow">SELECTED WORK</p>
-          <h2 id="selected-title">A few points in the record.</h2>
-          <Link to="/projects">See every project</Link>
+      <section className="history-section" aria-labelledby="history-title">
+        <header className="section-header">
+          <h2 id="history-title">Project history</h2>
+          <p>
+            The entries below use public repository dates and materials. The archive
+            grows as older work is checked and documented.
+          </p>
+        </header>
+        <div className="project-history">
+          {projectHistory.map((project) => (
+            <ProjectEntry key={project.slug} project={project} />
+          ))}
         </div>
-        <div className="project-grid">
-          {selectedProjects.map((project) => <ProjectCard key={project.slug} project={project} compact />)}
-        </div>
-      </section>
-
-      <section className="section history-section" aria-labelledby="history-title">
-        <div className="section-heading">
-          <p className="eyebrow">SHORT HISTORY</p>
-          <h2 id="history-title">An umbrella, not a straight line.</h2>
-        </div>
-        <ol className="timeline">
-          <li><span>Early years</span><p>The name began as a place to gather technical and educational ideas.</p></li>
-          <li><span>Along the way</span><p>Projects, teams, events, and organisation experiments gathered around it.</p></li>
-          <li><span>Today</span><p>The archive keeps the useful record, including work that changed course or stopped.</p></li>
-        </ol>
-        <Link className="text-link" to="/archive">Visit the archive</Link>
+        <Link className="plain-link" to="/archive">
+          Open the archive index
+        </Link>
       </section>
     </>
   );

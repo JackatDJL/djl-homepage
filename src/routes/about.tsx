@@ -9,36 +9,32 @@ function AboutPage() {
   return (
     <article className="prose page-section" aria-labelledby="about-title">
       <header className="page-intro">
-        <p className="eyebrow">ABOUT</p>
-        <h1 id="about-title">A historical name for a changing set of projects.</h1>
+        <h1 id="about-title">About DJL Foundation</h1>
       </header>
       <div className="prose-body">
         <p>
-          Jack Ruder started DJL Foundation as a youth-led umbrella idea around
-          technology, education, and experimentation. It was a way to make room for
-          projects before they had a fixed shape.
+          Jack Ruder started DJL Foundation as a name for technical education
+          work and projects made with other young people. Hack Club was an
+          important influence. It showed that students can organise, learn, and
+          publish technical work without waiting for a formal institution.
         </p>
         <p>
-          Experiences with Hack Club mattered here. They made a simple point feel
-          practical: young people can organise technical work, teach one another, and
-          make things in public without waiting for a large institution to grant permission.
+          The name later covered software, robotics, games, project weeks, and
+          civic experiments. It was useful because projects could start small.
+          Not all of them needed to become organisations.
         </p>
         <p>
-          Over time, teams, civic ideas, events, and project names lived under or around
-          the umbrella. Some became active projects. Some paused. Some never became formal
-          organisations. Some moved on and became their own thing.
+          Today, DJL Foundation documents that work. The archive includes finished
+          projects, stopped projects, and names that need more research.
         </p>
         <p>
-          DJL is a historical project name. It is not expanded here and does not describe
-          a legal entity. Today, the site keeps an honest record of that work and leaves
-          room for what comes next.
+          DJL is a historical project name. It is not expanded here and does not
+          describe a legal entity.
         </p>
       </div>
-      <aside className="legal-note">
-        <strong>Legal status.</strong> DJL Foundation is an independent project umbrella
-        and archive. It is not currently a formally incorporated foundation or registered
-        association.
-      </aside>
+      <p className="quiet-disclaimer">
+        DJL Foundation is not a formally incorporated foundation or registered association.
+      </p>
     </article>
   );
 }

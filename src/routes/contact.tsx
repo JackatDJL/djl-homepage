@@ -9,11 +9,9 @@ function ContactPage() {
   return (
     <section className="page-section contact-page" aria-labelledby="contact-title">
       <header className="page-intro">
-        <p className="eyebrow">CONTACT</p>
-        <h1 id="contact-title">For archive corrections, project notes, or a conversation.</h1>
+        <h1 id="contact-title">Contact</h1>
         <p>
-          If you have a detail, link, photograph, or correction for an archive entry,
-          send it through. The record improves when the people who were there help with it.
+          Send corrections, links, photographs, or other source material for the archive.
         </p>
       </header>
       <dl className="contact-list">

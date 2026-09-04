@@ -1,36 +1,32 @@
 import type { Project } from "../../content/projects";
-import { statusLabels } from "../../content/projects";
 
-type ProjectCardProps = {
-  project: Project;
-  compact?: boolean;
-};
-
-export function ProjectCard({ project, compact = false }: ProjectCardProps) {
+export function ProjectEntry({ project }: { project: Project }) {
   return (
-    <article className={compact ? "project-card project-card-compact" : "project-card"}>
-      <div className="project-card-top">
-        <p className="metadata">{project.period}</p>
-        <span className={`status status-${project.status}`}>
-          {statusLabels[project.status]}
-        </span>
+    <article className="project-entry">
+      <div className="project-year">{project.year}</div>
+      <div className="project-record">
+        <div className="project-title-row">
+          <h2>{project.name}</h2>
+          <span className={`project-status project-status-${project.status}`}>
+            {project.status}
+          </span>
+        </div>
+        <p>{project.description}</p>
+        {project.links.length > 0 && (
+          <p className="project-links">
+            {project.links.map((link) => (
+              <a href={link.url} key={link.url}>
+                {link.label}
+              </a>
+            ))}
+          </p>
+        )}
       </div>
-      <h3>{project.name}</h3>
-      <p className="project-description">{project.description}</p>
-      <ul className="topic-list" aria-label={`Topics for ${project.name}`}>
-        {project.topics.map((topic) => (
-          <li key={topic}>{topic}</li>
-        ))}
-      </ul>
-      {!compact && (
-        <p className="project-relationship">{project.relationship}</p>
-      )}
-      {project.note && <p className="project-note">{project.note}</p>}
-      {(project.url || project.githubUrl) && (
-        <p className="project-links">
-          {project.url && <a href={project.url}>Project site</a>}
-          {project.githubUrl && <a href={project.githubUrl}>GitHub</a>}
-        </p>
+      {project.artifact && (
+        <figure className="project-artifact">
+          <img src={project.artifact.src} alt={project.artifact.alt} loading="lazy" />
+          <figcaption>{project.artifact.caption}</figcaption>
+        </figure>
       )}
     </article>
   );
