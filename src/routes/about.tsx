@@ -13,7 +13,7 @@ function AboutPage() {
       </header>
       <div className="prose-body">
         <p>
-          Jack Ruder started DJL Foundation as a name for technical education
+          Around 2023, Jack Ruder started DJL Foundation as a name for technical education
           work and projects made with other young people. Hack Club was an
           important influence. It showed that students can organise, learn, and
           publish technical work without waiting for a formal institution.

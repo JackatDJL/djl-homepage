@@ -21,9 +21,9 @@ function Home() {
             robotics, technical youth education, and civic projects.
           </p>
           <p>
-            It began with local work around Hack Club and technical education.
-            Over time, teams, websites, games, events, and organisation ideas used
-            the name. Some continued. Some stopped. Some became separate projects.
+            It began around 2023 through local work with Hack Club and technical
+            education. Over time, teams, websites, games, events, and organisation
+            ideas used the name. Some continued. Some stopped. Some became separate projects.
           </p>
           <p className="quiet-disclaimer">
             DJL Foundation is not a formally incorporated foundation or registered association.
@@ -35,8 +35,7 @@ function Home() {
         <header className="section-header">
           <h2 id="history-title">Project history</h2>
           <p>
-            The entries below use public repository dates and materials. The archive
-            grows as older work is checked and documented.
+            This is the DJL record. Projects are ordered by their documented period.
           </p>
         </header>
         <div className="project-history">

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { archiveIndex } from "../content/projects";
+import { ProjectEntry } from "../components/site/project-card";
+import { archiveProjects } from "../content/projects";
 
 export const Route = createFileRoute("/archive")({
   head: () => ({ meta: [{ title: "Archive | DJL Foundation" }] }),
@@ -10,21 +11,18 @@ function ArchivePage() {
   return (
     <section className="page-section" aria-labelledby="archive-title">
       <header className="page-intro">
-        <h1 id="archive-title">Archive index</h1>
+        <h1 id="archive-title">Archive</h1>
         <p>
-          These names appear in the DJL history. Their dates, links, and source
-          material have not all been checked yet.
+          Experiments that were connected to DJL Foundation but were not completed.
         </p>
       </header>
-      <ol className="archive-index">
-        {archiveIndex.map((name) => (
-          <li key={name}>{name}</li>
+      <div className="project-history">
+        {archiveProjects.map((project) => (
+          <ProjectEntry key={project.slug} project={project} />
         ))}
-      </ol>
+      </div>
       <p className="archive-note">
-        Old projects stay listed even when the record is incomplete. A missing
-        page means that the material has not been assembled, not that the work
-        did not happen.
+        These projects remain here because unfinished work is part of the history.
       </p>
     </section>
   );
